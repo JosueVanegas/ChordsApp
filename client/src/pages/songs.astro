@@ -1,0 +1,10 @@
+---
+import Layout from "../Layout/Layout.astro";
+import SongShowMin from "../components/SongsShowMin";
+---
+
+<Layout title="songs">
+  <div class="bg-red-900">
+    <SongShowMin client:load />
+  </div>
+</Layout>

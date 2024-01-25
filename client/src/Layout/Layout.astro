@@ -1,0 +1,85 @@
+---
+import Header from "../components/Header";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <div class="layout">
+    <div class="header">
+      <Header />
+    </div>
+    <body class="body">
+      <slot />
+    </body>
+    <div class="right">right</div>
+    <div class="footer">footer</div>
+  </div>
+
+  <style>
+    :root {
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        "Open Sans",
+        "Helvetica Neue",
+        sans-serif;
+    }
+    .layout {
+      display: grid;
+      grid:
+        "header header header" auto
+        "left body right" 1fr
+        "footer footer footer" auto
+        / auto 1fr auto;
+      gap: 8px;
+    }
+
+    .header {
+      grid-area: header;
+      height: 500px;
+    }
+    .body {
+      grid-area: body;
+    }
+    .right {
+      grid-area: right;
+      width: 250px;
+      background-color: aqua;
+    }
+    .footer {
+      grid-area: footer;
+      height: 200px;
+      background: linear-gradient(to left, rgb(50, 75, 216), rgb(13, 29, 150));
+    }
+    .header {
+      background: linear-gradient(to left, rgb(50, 75, 216), rgb(13, 29, 150));
+    }
+    @media screen and (max-width: 700px) {
+      .right {
+        display: none;
+      }
+    }
+  </style>
+
+
+</html>
