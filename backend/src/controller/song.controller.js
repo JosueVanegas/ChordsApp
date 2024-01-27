@@ -26,7 +26,7 @@ export const postSong = async(req,res)=>{
     try {
         const {body,file} = req;
         const newSong = new Song({
-            title: body.title,
+            name: body.name,
             artist: body.artist || 'unknow',
             genre: body.genre || 'unknow',
             album: body.album || 'unknow',
@@ -50,7 +50,7 @@ export const putSong = async(req,res)=>{
         if(!id) return res.status(200).json({message:"Missing id, the id param is required"})
         const {body,file} = req;
         const request = {
-            title: body.title,
+            name: body.name,
             artist: body.artist || 'unknow',
             genre: body.genre || 'unknow',
             album: body.album || 'unknow',

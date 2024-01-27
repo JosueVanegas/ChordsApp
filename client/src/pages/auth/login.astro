@@ -1,9 +1,12 @@
 ---
+import Layout from "../../Layout/Neutral.astro";
 import LoginForm from "../../components/LoginForm";
 ---
 
-<body
-  class="flex justify-center items-center mt-20 bg-gradient-to-r from-blue-800 to-blue-900"
->
-  <LoginForm client:load />
-</body>
+<Layout title="Rader | login">
+  <main
+    class="bg-gradient-to-r absolute h-full w-full pt-44 from-blue-800 to-blue-900"
+  >
+    <LoginForm client:load />
+  </main>
+</Layout>

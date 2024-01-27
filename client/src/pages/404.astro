@@ -1,0 +1,56 @@
+---
+import Layout from "../Layout/Neutral.astro";
+---
+
+<Layout title="NOT FOUND">
+  <div class="notFound">
+    <div class="frog">
+      <img src="/raderLogo.png" alt="" />
+    </div>
+    <h1>Page not found</h1>
+    <a href="/">Rader | Home</a>
+  </div>
+  <style>
+    .notFound {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 90vh;
+      background-color: rgb(209, 209, 217);
+    }
+    div h1 {
+      font-size: 2rem;
+    }
+    a {
+      color: blue;
+      font-size: 30px;
+    }
+    img {
+      height: 100px;
+      width: 100px;
+      animation: rotateFrog 3s linear infinite;
+    }
+    .frog {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(209, 209, 217);
+      height: 120px;
+      width: 120px;
+      border-radius: 50%;
+      margin-bottom: 100px;
+      box-shadow:
+        5px 5px 10px rgb(196, 185, 185),
+        -5px -5px 10px rgba(255, 255, 255, 0.5);
+    }
+    @keyframes rotateFrog {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</Layout>

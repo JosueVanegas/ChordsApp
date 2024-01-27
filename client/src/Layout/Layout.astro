@@ -3,9 +3,14 @@ import Header from "../components/Header";
 
 interface Props {
   title: string;
+  cardTitle: string;
+  cardContent: string;
+  buttonCardUrl: string;
+  buttonMessage: string;
 }
 
-const { title } = Astro.props;
+const { title, cardTitle, cardContent, buttonCardUrl, buttonMessage } =
+  Astro.props;
 ---
 
 <!doctype html>
@@ -17,69 +22,83 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <!-- Otros elementos del head, como enlaces a estilos, scripts, etc. -->
   </head>
-  <div class="layout">
+  <body class="body">
     <div class="header">
-      <Header />
+      <Header
+        cardContent={cardContent}
+        cardTitle={cardTitle}
+        buttonUrl={buttonCardUrl}
+        buttonMessage={buttonMessage}
+      />
     </div>
-    <body class="body">
-      <slot />
-    </body>
-    <div class="right">right</div>
+
+    <div class="content">
+      <div class="main-content">
+        <slot />
+      </div>
+
+      <div class="right-content">aqui iran el top canciones</div>
+    </div>
+
     <div class="footer">footer</div>
-  </div>
 
-  <style>
-    :root {
-      font-family:
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        "Open Sans",
-        "Helvetica Neue",
-        sans-serif;
-    }
-    .layout {
-      display: grid;
-      grid:
-        "header header header" auto
-        "left body right" 1fr
-        "footer footer footer" auto
-        / auto 1fr auto;
-      gap: 8px;
-    }
-
-    .header {
-      grid-area: header;
-      height: 500px;
-    }
-    .body {
-      grid-area: body;
-    }
-    .right {
-      grid-area: right;
-      width: 250px;
-      background-color: aqua;
-    }
-    .footer {
-      grid-area: footer;
-      height: 200px;
-      background: linear-gradient(to left, rgb(50, 75, 216), rgb(13, 29, 150));
-    }
-    .header {
-      background: linear-gradient(to left, rgb(50, 75, 216), rgb(13, 29, 150));
-    }
-    @media screen and (max-width: 700px) {
-      .right {
-        display: none;
+    <style>
+      :root {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Oxygen,
+          Ubuntu,
+          Cantarell,
+          "Open Sans",
+          "Helvetica Neue",
+          sans-serif;
       }
-    }
-  </style>
-
-
+      .body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .header {
+        background: linear-gradient(
+          to left,
+          rgb(50, 75, 216),
+          rgb(13, 29, 150)
+        );
+        color: white;
+        padding: 16px;
+      }
+      .content {
+        display: flex;
+        flex-direction: row;
+      }
+      .main-content {
+        flex: 1;
+        padding: 16px;
+        background-color: white;
+      }
+      .right-content {
+        width: 250px;
+        background-color: rgb(234, 235, 240);
+        color: white;
+        padding: 16px;
+      }
+      .footer {
+        background: linear-gradient(
+          to left,
+          rgb(50, 75, 216),
+          rgb(13, 29, 150)
+        );
+        color: white;
+        padding: 16px;
+        margin-top: auto; /* Para empujar el pie de página hacia la parte inferior */
+      }
+    </style>
+  </body>
 </html>
