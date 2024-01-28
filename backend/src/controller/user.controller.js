@@ -13,9 +13,9 @@ export const getUser = async(req,res)=>{
 }
 export const getOneUser = async(req,res)=>{
     try{
-        const id = req.params.id;
-        if(!id)return res.status(400).json({"invalid request":"you need to insert the id"});
-        const query = await User.findById(id,'name email');
+        const _id = req.params.id;
+        if(!_id)return res.status(400).json({"invalid request":"you need to insert the id"});
+        const query = await User.findById(_id,'name email');
         if(query.length==0) return res.status(400).json({"not finded":"the object with the id does't exists"});
         return res.status(200).json(query)
     }catch(err){

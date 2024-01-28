@@ -12,14 +12,15 @@ export const getSongs = async(req,res)=>{
 }
 export const getSong = async(req,res)=>{
     try {
-        const id = req.params.id;
-        if(!id)return res.status(200).json({message:"Missing id, the id param is required"})
-        const data = await Song.findOne(id);
+        const _id = req.params.id;
+        if(!_id)return res.status(200).json({message:"Missing id, the id param is required"})
+        const data = await Song.findById({ _id });
+    console.log(data)
         if(!data) return res.status(200).json({message:"query failed"});
         if(data.length == 0)return res.status(200).json({message:"song dont founded"})
         return res.status(200).json(data)
     } catch (error) {
-        return res.status(500).json(JSON.stringify(error));
+        return console.log(error)
     }
 }
 export const postSong = async(req,res)=>{

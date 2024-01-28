@@ -2,7 +2,6 @@ import { TbZoomReset } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SongCardMin from "./SongCardMin";
-import { BiSearch } from "react-icons/bi";
 
 const SongShowMin = () => {
   const [songs, setSongs] = useState([]);
@@ -31,16 +30,18 @@ const SongShowMin = () => {
         setSongs(response.data);
       })
       .catch((err) => console.log(err))
-      .finally(setLoading(false));
+      .finally(() => setLoading(false));
   };
-  useEffect(loadData, []);
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <div>
       <div className="flex items-center justify-start gap-5 m-5">
         <h1>Search</h1>
         <input
-          className="border-2 outline-blue-500 px-2 py-2 text-center"
+          className="border-2 outline-blue-500 px-2 py-2 text-center focus:outline-blue-900"
           placeholder="song/artist"
           type="text"
           onChange={handleSearch}
@@ -57,6 +58,7 @@ const SongShowMin = () => {
         {songs &&
           songs.map((item) => (
             <SongCardMin
+              key={item._id}
               id={item._id}
               name={item.name}
               artist={item.artist}

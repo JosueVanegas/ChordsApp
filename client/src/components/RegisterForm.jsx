@@ -1,8 +1,10 @@
 import { useState } from "react";
-import axios from "axios";
+import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 import Button from "./Button";
 
 const RegisterForm = () => {
+  const { register } = useAuth();
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -18,12 +20,7 @@ const RegisterForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios
-      .post("http://localhost:8081/api/register", data)
-      .then((response) => {
-        alert(response.data.message);
-      })
-      .catch((err) => alert(err));
+    await register(data);
   };
 
   return (
@@ -32,9 +29,9 @@ const RegisterForm = () => {
       onSubmit={handleSubmit}
     >
       <div className="text-center">
-        <a href="/">
+        <Link to="/">
           <h1 className="text-4xl">Rader</h1>
-        </a>
+        </Link>
         <h3 className="">Register</h3>
       </div>
       <div className="flex flex-col items-start justify-center mb-5 text-white">
@@ -70,9 +67,9 @@ const RegisterForm = () => {
         <Button variant="default" type="button" href="/auth/login">
           login
         </Button>
-        <Button variant="primary" type="submit">
+        <button className="bg-white text-blue-900 px-2 py-1 m-2" type="submit">
           register
-        </Button>
+        </button>
       </div>
     </form>
   );

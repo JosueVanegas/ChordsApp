@@ -1,16 +1,4 @@
----
-import Layout from "../Layout/Neutral.astro";
----
 
-<Layout title="NOT FOUND">
-  <div class="notFound">
-    <div class="frog">
-      <img src="/raderLogo.png" alt="" />
-    </div>
-    <h1>Page not found</h1>
-    <a href="/">Rader | Home</a>
-  </div>
-  <style>
     .notFound {
       display: flex;
       flex-direction: column;
@@ -22,11 +10,11 @@ import Layout from "../Layout/Neutral.astro";
     div h1 {
       font-size: 2rem;
     }
-    a {
+    .link {
       color: blue;
       font-size: 30px;
     }
-    img {
+    .frog-image {
       height: 100px;
       width: 100px;
       animation: rotateFrog 3s linear infinite;
@@ -52,5 +40,3 @@ import Layout from "../Layout/Neutral.astro";
         transform: rotate(360deg);
       }
     }
-  </style>
-</Layout>

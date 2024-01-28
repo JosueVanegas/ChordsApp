@@ -1,13 +1,13 @@
 import { useState } from "react";
-import axios from "axios";
-import Button from "./Button";
+import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
+  const { login } = useAuth();
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-  const [message, setMessage] = useState();
 
   const handleChange = (event) => {
     setData({
@@ -18,14 +18,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios
-      .post("http://localhost:8081/api/login", data)
-      .then((response) => {
-        const info = response.data.message;
-        setMessage(info);
-        alert(info);
-      })
-      .catch((err) => alert(err));
+    await login(data);
   };
 
   return (
@@ -34,9 +27,9 @@ const LoginForm = () => {
       onSubmit={handleSubmit}
     >
       <div className="text-center">
-        <a href="/">
+        <Link to="/">
           <h1 className="text-4xl">Rader</h1>
-        </a>
+        </Link>
         <h3 className="">login</h3>
       </div>
       <div className="flex flex-col items-start justify-center mb-5 text-white">
@@ -60,14 +53,14 @@ const LoginForm = () => {
         />
       </div>
       <div>
-        <Button variant="primary" type="submit">
+        <button className="bg-white text-blue-900 px-2 py-1 m-2" type="submit">
           log in
-        </Button>
+        </button>
       </div>
       <div>
-        <a className="text-white underline" href="/auth/register">
+        <Link className="text-white underline" to="/auth/register">
           register a new account
-        </a>
+        </Link>
       </div>
     </form>
   );

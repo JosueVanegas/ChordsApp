@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { Routes, Route, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
+import Songs from "./pages/Songs";
+import Header from "./components/Header";
+import DashboardAdmin from "./pages/admin/DashboardAdmin.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import Song from "./pages/Song.jsx";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import Page404 from "./pages/404/Page404.jsx";
 function App() {
-  const [count, setCount] = useState(0)
+  const location = useLocation();
+  const showHeader = !["/auth/register", "/auth/login", "*"].includes(
+    location.pathname
+  );
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main>
+      {showHeader && <Header />}
+
+      <Routes>
+        <Route path="/auth/register" element={<Register />}></Route>
+        <Route path="/auth/login" element={<Login />}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/songs" element={<Songs />}></Route>
+        <Route path="/song/:id" element={<Song />}></Route>
+        <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/admin/dashboard" element={<DashboardAdmin />}></Route>
+        <Route path="*" element={<Page404 />}></Route>
+      </Routes>
+    </main>
+  );
 }
 
-export default App
+export default App;

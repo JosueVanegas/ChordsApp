@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
+
 const SongCardMin = ({
   id,
   name = "cancion",
@@ -7,27 +10,31 @@ const SongCardMin = ({
   year,
 }) => {
   return (
-    <div className="flex  items-center justify-around min-h-44 max-h-44 max-w-96 min-w-96  m-2 p-2 pl-0 bg-gray-100 ">
-      <div className="flex flex-col max-w-44">
-        <div className="flex flex-col">
-          <h1 className="text-xl">{name.slice(0, 15)}</h1>
-          <h3>{artist}</h3>
-          <p>{album}</p>
+    <Link to={`/song/${id}`}>
+      <div
+        className="flex flex-col border-4 cursor-pointer  items-center justify-center min-h-64 max-h-64 max-w-44 min-w-44  m-3 px-2 bg-gray-100 
+    hover:bg-white hover:border-blue-900 transition-colors"
+      >
+        <div className="flex flex-col items-start ">
+          <div className="flex flex-col ">
+            <h1 className="text-xl font-bold   ">{name.slice(0, 20)}</h1>
+            <h3>artist: {artist}</h3>
+            <p>album: {album ? album : "-"} </p>
+          </div>
+          <div>
+            <p>genre: {genre}</p>
+            <p>year: {year}</p>
+          </div>
         </div>
-        <div>
-          <p>
-            {genre} - {year}
-          </p>
+        <div className="flex justify-center items-center mt-auto mb-5">
+          <Link to={`/song/${id}`}>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded">
+              view details
+            </button>
+          </Link>
         </div>
       </div>
-      <div className="flex justify-center items-center">
-        <a href={`/songs/${id}`}>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded">
-            view
-          </button>
-        </a>
-      </div>
-    </div>
+    </Link>
   );
 };
 

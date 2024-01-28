@@ -10,7 +10,7 @@ const app = express();
 app.disable("x-powered-by")
 app.use(morgan('dev'));
 app.use(cors({
-    origin: ['http://localhost:4321'],
+    origin: ['http://localhost:4321','http://localhost:5173'],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 }));
 

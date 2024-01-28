@@ -5,7 +5,7 @@ import User from '../model/user.model.js'
 
 export const register = async(req,res)=>{
     try {
-        const {email,name,password} = req.body
+        const {email,name,password,isAdmin} = req.body
         if(!email || !password || !name) return res.status(200).json({message:'bad request'}); 
         const encrypPassword = await cp.AES.encrypt(password,ENCRIPT_KEY);
         const userExist = await User.findOne({ email: email });
@@ -14,11 +14,12 @@ export const register = async(req,res)=>{
         const newUser = new User({
             name,
             email,
-            password:encrypPassword
+            password:encrypPassword,
+            isAdmin:isAdmin || false
         });
         const result = await newUser.save();
         if(!result) return res.status(400).json({message:'bad request'});
-        return res.status(201).json('New user register successfuly')
+        return res.status(201).json(result)
     } catch (error) {
         return res.status(500).json(error)
     }
@@ -32,13 +33,13 @@ export const login = async(req,res)=>{
         const OriginalPassword =  cp.AES.decrypt(user.password,ENCRIPT_KEY).toString(cp.enc.Utf8);
         if(OriginalPassword !== password) return  res.status(200).json({message:'invalid password'});
         
-       const token = await jwt.sign({
+        const token = await jwt.sign({
             id:user._id
         },JWT_KEY,{
             expiresIn:'1d'
         })
         res.cookie('token',token);
-        return res.status(200).json({message:`Welcome back ${user.name}`});
+        return res.status(200).json(user);
     } catch (error) {
         return res.status(500).json(error)
     }

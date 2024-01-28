@@ -8,5 +8,5 @@ import {deleteUser, getOneUser, getUser, putUser} from '../controller/user.contr
 router.get('/user',verifyToken,getUser);
 router.delete('/user/:id',verifyToken,deleteUser)
 router.get('/user/:id',verifyToken,getOneUser);
-router.put('/user/:id',multer().none(),verifyToken,putUser)
+router.put('/user/:id',verifyToken,multer().none(),putUser)
 export default router
