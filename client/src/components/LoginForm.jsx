@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import Toast from "./Toast";
 
 const LoginForm = () => {
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -27,7 +28,12 @@ const LoginForm = () => {
       onSubmit={handleSubmit}
     >
       <div className="text-center">
-        <Link to="/">
+        <Link className="flex flex-col items-center justify-center" to="/">
+          <img
+            className="h-10 w-10 animate-bounce"
+            src="/raderWhite.png"
+            alt=""
+          />
           <h1 className="text-4xl">Rader</h1>
         </Link>
         <h3 className="">login</h3>
@@ -62,6 +68,12 @@ const LoginForm = () => {
           register a new account
         </Link>
       </div>
+      {user && (
+        <>
+          <Toast message={`Welcome back ${user.name}`} />
+          <Navigate to={"/"} />;
+        </>
+      )}
     </form>
   );
 };

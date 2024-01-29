@@ -9,7 +9,8 @@ const songSchema = new mongoose.Schema(
         year: Number,
         lyric:String,
         chords:String,
-        docUrl:String
+        docUrl:String,
+        songUrl:String
   },
   {
     timestamps: true,

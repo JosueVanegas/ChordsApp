@@ -27,14 +27,15 @@ export const postSong = async(req,res)=>{
     try {
         const {body,file} = req;
         const newSong = new Song({
-            name: body.name,
+            name: body.name ,
             artist: body.artist || 'unknow',
             genre: body.genre || 'unknow',
-            album: body.album || 'unknow',
-            year: parseInt(body.year) || 2000,
+            album: body.album || 'single',
+            year: body.year || '2000',
             lyric:body.lyric || '',
-            chords:body.chords,
-            docUrl:file.path || 'none'
+            chords:body.chords || '',
+            docUrl:file.path || 'none',
+            songUrl:body.songUrl || 'none'
         })
         const result = await newSong.save();
         if(!result) return res.status(200).json({message:"bad request"});
@@ -54,11 +55,12 @@ export const putSong = async(req,res)=>{
             name: body.name,
             artist: body.artist || 'unknow',
             genre: body.genre || 'unknow',
-            album: body.album || 'unknow',
+            album: body.album || 'single',
             year: parseInt(body.year) || 2000,
             lyric:body.lyric || '',
             chords:body.chords,
-            docUrl:file.path || 'none'
+            docUrl:file.path || 'none',
+            songUrl:body.songUrl || ''
         }
         const result = await Song.findByIdAndUpdate(id,request,{new:true})
         if(!result) return res.status(200).json({message:"bad request"});

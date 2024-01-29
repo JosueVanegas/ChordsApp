@@ -24,7 +24,7 @@ const SongShowMin = () => {
   const loadData = async () => {
     setLoading(true);
     await axios
-      .get("http://localhost:8081/api/song")
+      .get("http://localhost:8081/api/song", { withCredentials: true })
       .then((response) => {
         setData(response.data);
         setSongs(response.data);

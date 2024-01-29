@@ -29,7 +29,12 @@ const RegisterForm = () => {
       onSubmit={handleSubmit}
     >
       <div className="text-center">
-        <Link to="/">
+        <Link className="flex flex-col items-center justify-center" to="/">
+          <img
+            className="h-10 w-10 animate-bounce"
+            src="/raderWhite.png"
+            alt=""
+          />
           <h1 className="text-4xl">Rader</h1>
         </Link>
         <h3 className="">Register</h3>
@@ -38,7 +43,7 @@ const RegisterForm = () => {
         <h2 className="text-left ">username</h2>
         <input
           className="text-center text-blue-900 p-2 border-2 border-blue-700 outline-green-500"
-          id="email"
+          id="name"
           type="text"
           name="name"
           placeholder="example"

@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-
 export const UserContext = createContext();
 
 export const useAuth = () => {
@@ -16,12 +15,9 @@ export const UserProvider = ({ children }) => {
     const storedUser = localStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
   });
-
   const saveUserToLocalStorage = (userData) => {
     localStorage.setItem("user", JSON.stringify(userData));
   };
-
-  const redirectToHome = () => {};
 
   const register = (data) => {
     axios
@@ -29,7 +25,6 @@ export const UserProvider = ({ children }) => {
       .then((response) => {
         setUser(response.data);
         saveUserToLocalStorage(response.data);
-        redirectToHome();
       })
       .catch((err) => alert(err));
   };
@@ -38,11 +33,18 @@ export const UserProvider = ({ children }) => {
     axios
       .post("http://localhost:8081/api/login", data)
       .then((response) => {
-        setUser(response.data);
-        saveUserToLocalStorage(response.data);
-        redirectToHome();
+        const loggedInUser = response.data;
+
+        if (loggedInUser && loggedInUser.name) {
+          setUser(loggedInUser);
+          saveUserToLocalStorage(loggedInUser);
+        } else {
+          console.error("Invalid user data received from server");
+        }
       })
-      .catch((err) => alert(err));
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const logout = () => {
