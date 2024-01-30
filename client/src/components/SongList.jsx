@@ -1,9 +1,10 @@
 import { TbZoomReset } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import SongCardMin from "./SongCardMin";
+import SongCardMin from "./SongCard";
 
-const SongShowMin = () => {
+// eslint-disable-next-line react/prop-types
+const SongList = ({ isAdmin = false }) => {
   const [songs, setSongs] = useState([]);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -65,6 +66,7 @@ const SongShowMin = () => {
               year={item.year}
               album={item.album}
               genre={item.genre}
+              isAdmin={isAdmin}
             ></SongCardMin>
           ))}
       </div>
@@ -72,4 +74,4 @@ const SongShowMin = () => {
   );
 };
 
-export default SongShowMin;
+export default SongList;

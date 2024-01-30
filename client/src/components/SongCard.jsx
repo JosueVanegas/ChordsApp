@@ -1,6 +1,8 @@
+import { BiEdit } from "react-icons/bi";
+import { AiOutlineDelete } from "react-icons/ai";
+import { BiShow } from "react-icons/bi";
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
-
 const SongCardMin = ({
   id,
   name = "cancion",
@@ -8,6 +10,7 @@ const SongCardMin = ({
   genre,
   album,
   year,
+  isAdmin = false,
 }) => {
   return (
     <Link to={`/song/${id}`}>
@@ -26,12 +29,26 @@ const SongCardMin = ({
             <p>year: {year}</p>
           </div>
         </div>
-        <div className="flex justify-center items-center mt-auto mb-5">
-          <Link to={`/song/${id}`}>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded">
-              view details
-            </button>
-          </Link>
+        <div className="flex justify-center items-center gap-2 mt-auto mb-5">
+          <div>
+            <Link to={`/song/${id}`}>
+              <button className="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-2 rounded">
+                <BiShow />
+              </button>
+            </Link>
+          </div>
+          {isAdmin ? (
+            <>
+              <button className="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-2 rounded">
+                <BiEdit />
+              </button>
+              <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-2 rounded">
+                <AiOutlineDelete />
+              </button>
+            </>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </Link>

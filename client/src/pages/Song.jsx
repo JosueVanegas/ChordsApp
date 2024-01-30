@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 import copy from "clipboard-copy";
 
 const Song = () => {
+  const { id } = useParams();
   const [data, setData] = useState();
   const [lyricsCopy, setLyricsCopy] = useState("");
   const [chordsCopy, setChordsCopy] = useState("");
-  const { id } = useParams();
 
   const handleCopyLyrics = () => {
     copy(data.lyric);

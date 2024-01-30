@@ -31,7 +31,7 @@ export const UserProvider = ({ children }) => {
 
   const login = (data) => {
     axios
-      .post("http://localhost:8081/api/login", data)
+      .post("http://localhost:8081/api/login", data, { withCredentials: true })
       .then((response) => {
         const loggedInUser = response.data;
 

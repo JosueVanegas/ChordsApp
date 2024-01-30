@@ -1,4 +1,4 @@
-import SongShowMin from "../components/SongsShowMin";
+import SongShowMin from "../components/SongList";
 
 const Songs = () => {
   return (

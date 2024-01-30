@@ -5,7 +5,6 @@ export const verifyToken = async (req, res, next) => {
   try {
     const { token } = req.cookies;
     if (!token) {
-      console.log("No se encontró el token.", token);
       return res.status(400).json("NO AUTHORIZATION");
     }
 
@@ -15,8 +14,6 @@ export const verifyToken = async (req, res, next) => {
         resolve(encoded);
       });
     });
-
-    console.log("Usuario verificado:", user);
     req.user = user;
     next();
   } catch (error) {

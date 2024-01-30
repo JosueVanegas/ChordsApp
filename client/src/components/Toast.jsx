@@ -5,10 +5,9 @@ const Toast = ({ message }) => {
 
   useEffect(() => {
     setVisible(true);
-    const visibility = setTimeout(() => {
+    setTimeout(() => {
       setVisible(false);
-    }, 5000);
-    clearTimeout(visibility);
+    }, 4000);
   }, []);
   return (
     <div

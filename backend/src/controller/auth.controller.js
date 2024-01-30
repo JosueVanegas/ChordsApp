@@ -47,7 +47,6 @@ export const login = async (req, res) => {
       },
       JWT_KEY
     );
-    console.log(token);
     res.cookie("token", token);
     return res.status(200).json(user);
   } catch (error) {
